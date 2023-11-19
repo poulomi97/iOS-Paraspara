@@ -1,0 +1,45 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2757
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Roman;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red211\green24\blue149;\red0\green0\blue0;
+\red255\green255\blue255;\red0\green160\blue255;\red255\green44\blue56;\red35\green255\blue131;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\csgenericrgb\c82800\c9500\c58300;\csgenericrgb\c0\c0\c0;
+\csgenericrgb\c100000\c100000\c100000;\csgenericrgb\c0\c62600\c100000;\csgenericrgb\c100000\c17100\c21900;\csgenericrgb\c13700\c100000\c51200;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww15040\viewh12140\viewkind0
+\deftab720
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f0\fs24 \cf0 \expnd0\expndtw0\kerning0
+In ChatMessagesViewController.swift -->\
+In \'97 > func receviceMessage(dictionary:[String: Any])\{ (line 1095).\
+\
+ Under \'97> var jsonString = valData["val"] as? String (line 1121). --->  Add the following: \
+\pard\tx692\pardeftab692\partightenfactor0
+
+\f1\fs28 \cf3 \cb4 \kerning1\expnd0\expndtw0 if\cf5  \cf3 let\cf5  stringCheck = jsonString?.\cf6 contains\cf5 (\cf7 "&quot;"\cf5 ) \{\
+    \cf3 if\cf5  \cf8 stringCheck\cf5  \{\
+        \cf3 let\cf5  json_String = jsonString?\
+            .\cf6 replacingOccurrences\cf5 (\cf6 of\cf5 : \cf7 "&quot;"\cf5 , \cf6 with\cf5 : \cf7 "\\""\cf5 )\
+            .\cf6 replacingOccurrences\cf5 (\cf6 of\cf5 : \cf7 "&apos;"\cf5 , \cf6 with\cf5 : \cf7 "'"\cf5 )\
+        \
+        \cf3 var\cf5  json_Object = [\cf6 String\cf5 : \cf3 Any\cf5 ]()\
+        \
+        \cf3 if\cf5  \cf3 let\cf5  jsonData = json_String?.\cf6 data\cf5 (\cf6 using\cf5 : .\cf6 utf8\cf5 ),\
+           \cf3 let\cf5  jsonObject = \cf3 try\cf5 ? \cf6 JSONSerialization\cf5 .\cf6 jsonObject\cf5 (\cf6 with\cf5 : jsonData, \cf6 options\cf5 : []) \cf3 as\cf5 ? [\cf6 String\cf5 : \cf3 Any\cf5 ] \{\
+            json_Object = jsonObject\
+        \} \cf3 else\cf5  \{\
+            \cf6 print\cf5 (\cf7 "Error parsing JSON."\cf5 )\
+        \}\
+        \
+        \cf3 do\cf5  \{\
+            \cf3 let\cf5  jsonData = \cf3 try\cf5  \cf6 JSONSerialization\cf5 .\cf6 data\cf5 (\cf6 withJSONObject\cf5 : json_Object, \cf6 options\cf5 : .\cf6 prettyPrinted\cf5 )\
+            \cf3 if\cf5  \cf3 let\cf5  jsonToString = \cf6 String\cf5 (\cf6 data\cf5 : jsonData, \cf6 encoding\cf5 : .\cf6 utf8\cf5 ) \{\
+                jsonString = jsonToString\
+            \} \cf3 else\cf5  \{\
+                \cf6 print\cf5 (\cf7 "Error converting JSON data to string."\cf5 )\
+            \}\
+        \} \cf3 catch\cf5  \{\
+            \cf6 print\cf5 (\cf7 "Error: \cf5 \\(error.\cf6 localizedDescription\cf5 )\cf7 "\cf5 )\
+        \}\
+    \}\
+\}\
+}
