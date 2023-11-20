@@ -9,13 +9,12 @@
 \pard\pardeftab720\sa240\partightenfactor0
 
 \f0\fs24 \cf0 \expnd0\expndtw0\kerning0
-In ChatMessagesViewController.swift -->\
-In \'97 > func receviceMessage(dictionary:[String: Any])\{ (line 1095).\
-\
- Under \'97> var jsonString = valData["val"] as? String (line 1121). --->  Add the following: \
-\pard\tx692\pardeftab692\partightenfactor0
+In ChatMessagesViewController.swift -->
+In - > func receviceMessage(dictionary:[String: Any]) { (line 1095).
 
-\f1\fs28 \cf3 \cb4 \kerning1\expnd0\expndtw0 if\cf5  \cf3 let\cf5  stringCheck = jsonString?.\cf6 contains\cf5 (\cf7 "&quot;"\cf5 ) \{\
+ Under -> var jsonString = valData["val"] as? String (line 1121). --->  Add the following: 
+
+if let\cf5  stringCheck = jsonString?.\cf6 contains\cf5 (\cf7 "&quot;"\cf5 ) \{\
     \cf3 if\cf5  \cf8 stringCheck\cf5  \{\
         \cf3 let\cf5  json_String = jsonString?\
             .\cf6 replacingOccurrences\cf5 (\cf6 of\cf5 : \cf7 "&quot;"\cf5 , \cf6 with\cf5 : \cf7 "\\""\cf5 )\
